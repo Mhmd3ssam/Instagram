@@ -1,39 +1,24 @@
-import { useContext, useState, useEffect } from "react";
+import { useEffect, useState, useContext } from "react"
 import { Link, useHistory } from "react-router-dom"
-//import FirebaseContext from '../context/firebase'
-import * as ROUTES from './../constants/routes';
-import  {firebase , FieldValue} from '../lib/firebase'
 
-export default function Login(){
+export default function Signup(){
+
     const history = useHistory();
-    //const { firebase } = useContext(FirebaseContext);
-    const [emailAddress, setEmailAddress] = useState('');
-    const [password, setPassword] = useState('');
+    const {email,setEmailAddress} = useState('');
+    const {password,setPassword} = useState('');
+    const {username, setUsername} = useState('');
+    const {fullName, setFullName} = useState('');
 
-    const [error, setError] = useState('');
-    const isInvalid = password === "" || emailAddress === "";
+    const {error,setError} = useState('');
+    const isInvalid = email === '' || password === '';
 
-    const handleLogin = async (event) => {
-        event.preventDefault();
-    
-        try {
-          await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
-          history.push(ROUTES.DASHBOARD);
-        } catch (error) {
-          setEmailAddress('');
-          setPassword('');
-          setError(error.message);
-        }
-      };
-    
+    const handleSignup = async (event)=>{}
 
     useEffect(()=>{
-        document.title = "Logein - Instagram "
-        
-    },[])
+        document.title = "Sign Up - Insagram"
+    },[]);
 
-
-    return(
+    return (
         <div className="container 
         flex 
         mx-auto 
@@ -54,7 +39,7 @@ export default function Login(){
 
                     {error && <p className="mb04 text-xs text-red-primary">{error}</p>}
 
-                    <form onSubmit={handleLogin} method="POST">
+                    <form onSubmit={handleSignup} method="POST">
                             <input 
                                 type="text" 
                                 aria-label="Enter your email address"
@@ -134,6 +119,5 @@ export default function Login(){
             </div>
         </div>
     )
+
 }
-
-
